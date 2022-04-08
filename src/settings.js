@@ -1,27 +1,31 @@
 module.exports = {
-  title: 'Vue Element Admin',
+  title: '小慕读书',
 
   /**
    * @type {boolean} true | false
    * @description Whether show the settings right-panel
+   * 控制右侧控制面版是否显示
    */
-  showSettings: true,
+  showSettings: false,
 
   /**
    * @type {boolean} true | false
    * @description Whether need tagsView
+   * 是否显示tagsView(面包屑)
    */
   tagsView: true,
 
   /**
    * @type {boolean} true | false
    * @description Whether fix the header
+   * 是否固定头部
    */
   fixedHeader: false,
 
   /**
    * @type {boolean} true | false
    * @description Whether show the logo in sidebar
+   * 是否在侧边栏中显示徽标
    */
   sidebarLogo: false,
 

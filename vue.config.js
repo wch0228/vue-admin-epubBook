@@ -24,7 +24,8 @@ module.exports = {
    * In most cases please use '/' !!!
    * Detail: https://cli.vuejs.org/config/#publicpath
    */
-  publicPath: '/',
+  // 打包需要把 /改为.
+  publicPath: '.',
   outputDir: 'dist',
   assetsDir: 'static',
   lintOnSave: process.env.NODE_ENV === 'development',
@@ -35,8 +36,7 @@ module.exports = {
     overlay: {
       warnings: false,
       errors: true
-    },
-    before: require('./mock/mock-server.js')
+    }
   },
   configureWebpack: {
     // provide the app's title in webpack's name field, so that
@@ -79,6 +79,15 @@ module.exports = {
         return options
       })
       .end()
+    // 源码调试
+    //  将cheap-source-map 改为 source-map，如果希望提升构建速度可以改为 eval
+    // 通常建议开发时保持 eval 配置，以增加构建速度，当出现需要源码调试排查问题时改为 source-map
+    //修改之后重启项目
+    config
+      // https://webpack.js.org/configuration/devtool/#development
+      .when(process.env.NODE_ENV === 'development',
+        config => config.devtool('eval')
+      )
 
     config
       .when(process.env.NODE_ENV !== 'development',
@@ -87,7 +96,7 @@ module.exports = {
             .plugin('ScriptExtHtmlWebpackPlugin')
             .after('html')
             .use('script-ext-html-webpack-plugin', [{
-            // `runtime` must same as runtimeChunk name. default is `runtime`
+              // `runtime` must same as runtimeChunk name. default is `runtime`
               inline: /runtime\..*\.js$/
             }])
             .end()

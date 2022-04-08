@@ -12,6 +12,7 @@ const whiteList = ['/login', '/auth-redirect'] // no redirect whitelist
 
 router.beforeEach(async(to, from, next) => {
   // start progress bar
+  // 进度条加载
   NProgress.start()
 
   // set page title
